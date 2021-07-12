@@ -12,7 +12,6 @@ const history =useHistory();
   const email =useRef();
   const password =useRef();
   const cpassword =useRef();
-  const image =useRef();
 
   const handleClick = async (e) =>{
     e.preventDefault();
@@ -23,11 +22,11 @@ const history =useHistory();
         username:username.current.value,
         email:email.current.value,
         password:password.current.value,
-        image:image.current.value,
+
       };
       try{
         console.log(user);
-        await fetch("/api/users/register",
+        await fetch("http://localhost:5000/api/users/register",
     {
 method:"POST",
 headers:{
@@ -41,6 +40,7 @@ body:JSON.stringify({
     
         }).then(response => {
             // this is now called!
+            
         });
         history.push("/login");
       }
@@ -59,7 +59,7 @@ body:JSON.stringify({
   <div className="container px-5 py-15 mt-10 mx-auto flex sm:flex-nowrap flex-wrap">
     <div className="lg:w-2/3 md:w-1/2 overflow-hidden sm:mr-10 rounded
      flex items-end justify-start relative">
-    <img className="object-cover object-center " alt="hero" src="https://source.unsplash.com/1000x885/?information"/>
+    <img className="object-cover object-center " alt="hero" src="https://source.unsplash.com/1000x770/?information"/>
     </div>
     <div className="lg:w-1/3 md:w-1/2 bg-green-200 flex flex-col md:ml-auto w-full p-10">
     <Link to="/" className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
@@ -96,15 +96,8 @@ body:JSON.stringify({
       
       <div className="relative mb-4">
         <label htmlFor="cpassword"  className="leading-7 text-sm text-gray-600">Confirm Password</label>
-        <input type="password"  ref={cpassword} required minLength="6" id="cpassword" name="cpassword" className="w-full bg-white 
-        rounded border border-gray-300 
-        focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 
-        leading-8 transition-colors duration-200 ease-in-out" />
-      </div>
-     
-      <div className="relative mb-4">
-        <label htmlFor="image" className="leading-7 text-sm text-gray-600">Upload Your Photo</label>
-        <input type="file" ref={image}  required  id="image" name="image" accept="image/*" className="w-full bg-white 
+        <input type="password"  ref={cpassword} required minLength="6" id="cpassword" name="cpassword" 
+        className="w-full bg-white 
         rounded border border-gray-300 
         focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 
         leading-8 transition-colors duration-200 ease-in-out" />

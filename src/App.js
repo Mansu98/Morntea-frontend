@@ -5,16 +5,26 @@ import Home from "./Components/home";
 import Writeforus from "./Components/writeforus";
 import Register from "./Components/Signin-up/Register";
 import Login from "./Components/Signin-up/Login";
-// import Dashboard from "../Dashboard/src/App";
-
-
-
-
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
+
+
+
+import Sidebar from "./Dashboard/components/sidebar/Sidebar";
+import UserList from "./Dashboard/pages/userList/UserList";
+import Topbar from "./Dashboard/components/topbar/Topbar";
+import Dashboard from "./Dashboard/pages/home/Home";
+import User from "./Dashboard/pages/user/User";
+import PostList from "./Dashboard/pages/PostList/postList";
+import Post from "./Dashboard/pages/Post/post";
+import CreatePost from "./Dashboard/pages/CreatePost/createpost";
+import EditPost from "./Dashboard/pages/Post/editpost";
+
+import EditProfile from "./Dashboard/pages/userList/editprofile";
+
 
 function App() {
   return (
@@ -42,12 +52,89 @@ function App() {
           <Route exact path="/login">
             <Login />
           </Route>  
-          {/* <Route exact path="/dashboard">
-            <Dashboard />
-          </Route>  */}
+
+
+
+          <Route exact path="/dashboard">
+          <Topbar />
+          <div className="container" style={{ display: "flex",
+    marginTop: "10px"}}>
+        <Sidebar />
+        <Dashboard />
+          </div>
+    </Route>
+
+
+    <Route exact path="/dashboard/users">
+          <Topbar />
+          <div className="container" style={{ display: "flex",
+    marginTop: "10px"}}>
+        <Sidebar />
+         <UserList />
+          </div>
+    </Route>
+
+
+    <Route exact path="/dashboard/user/:userId">
+    <Topbar />
+          <div className="container" style={{ display: "flex",
+    marginTop: "10px"}}>
+        <Sidebar />
+            <User />
+            </div>
+          </Route>
+
+          <Route exact path="/dashboard/editpost">
+          <Topbar />
+          <div className="container" style={{ display: "flex",
+    marginTop: "10px"}}>
+        <Sidebar />
+            <EditPost />
+            </div>
+          </Route>
+
+          <Route exact path="/dashboard/posts">
+          <Topbar />
+          <div className="container" style={{ display: "flex",
+    marginTop: "10px"}}>
+        <Sidebar />
+            <PostList />
+            </div>
+          </Route>
+
+          <Route exact path="/dashboard/post">
+          <Topbar />
+          <div className="container" style={{ display: "flex",
+    marginTop: "10px"}}>
+        <Sidebar />
+            <Post />
+            </div>
+          </Route>
+
+          <Route exact path="/dashboard/createpost">
+          <Topbar />
+          <div className="container" style={{ display: "flex",
+    marginTop: "10px"}}>
+        <Sidebar />
+       <CreatePost />
+       </div>
+       </Route>
+
+       <Route exact path="/dashboard/editprofile">
+          <Topbar />
+          <div className="container" style={{ display: "flex",
+    marginTop: "10px"}}>
+        <Sidebar />
+    <EditProfile/>
+          </div>
+    </Route>
+
+
         </Switch> 
     </Router>
+    
     </>
+    
   );
 }
 
