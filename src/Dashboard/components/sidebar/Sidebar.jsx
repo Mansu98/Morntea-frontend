@@ -6,9 +6,10 @@ import {
   MailOutline,
   ChatBubbleOutline,
 } from "@material-ui/icons";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 export default function Sidebar() {
+  const history = useHistory();
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -55,7 +56,11 @@ export default function Sidebar() {
         </div>
         <div className="sidebarMenu">
         <div className="md:flex flex-wrap">
-    <Link to="/dashboard/editprofile" className="inline-flex text-white bg-green-500 border-0 ml-3
+    <Link onClick={()=> {
+      localStorage.removeItem("userInfo");
+      history.push("/");
+    }}
+     className="inline-flex text-white bg-green-500 border-0 ml-3
      py-1 px-3 focus:outline-none hover:bg-green-600 rounded text-md text-base mt-4 md:mt-0">Log Out
       </Link>
       </div>

@@ -1,47 +1,46 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import Header from "../Header";
 import Footer from "../footer";
 import {Link , useHistory} from "react-router-dom";
+import axios from "axios";
+import ErrorMessage from '../ErrorMessage';
 
 
 
 export default function Login() {
   const history = useHistory();
+  const [email,setEmail] = useState("");
+  const [password,setPassword] = useState("");
+  const [error,setError] = useState(false);
 
-  const [user,setUser] = useState({
-    email:"", password:""
-  });
-  let name,value;
-  const handleInputs = (e)=>{
-   
-    name= e.target.name;
-    value = e.target.value;
-    setUser({...user, [name]:value})
-  }
 
-  const PostLogin = async(e)=>{
-    e.preventDefault();
-    const {email,password}= user;
-    const res = await fetch("/api/users/login",
-    {
-method:"POST",
-headers:{
-  "Content-Type":"application/json"
-},
-body:JSON.stringify({
-  email,password
-})
-    });
+  useEffect(() => {
+    const userInfo = localStorage.getItem("userInfo");
 
-    const data = await res.json();
-
-    if(data.status=== 500 || !data){
-      window.alert("Invalid Emali or Password");
-    }else{
-      window.alert("Login Successfull");
-      history.push("../../Dashboard/index.html")
+    if (userInfo)  {
+      history.push("/dashboard");
     }
+  }, [history]);
+
+  const submitHandler = async(e) =>{
+    e.preventDefault();
+    console.log(email,password);
+    try{
+      const config ={
+        headers:{
+        "Content-Type":"application/json"
+ 
+      }
+    }
+
+    const {data} = await axios.post("http://localhost:5000/api/users/login", {email,password}, config)
+
+    localStorage.setItem('userInfo', JSON.stringify(data));
   }
+  catch(error){
+    setError("Invalid Email or Password");
+  }
+  };
     return (
         <div>
         <Header/>
@@ -61,7 +60,7 @@ body:JSON.stringify({
     <h2 className="sm:text-3xl text-2xl font-medium title-font mb-4 mt-4 text-gray-900 text-justify">Login
             </h2>
 
-            <form method="POST" className="loginForm" id="loginForm">
+            <form className="loginForm" id="loginForm" onSubmit={submitHandler}>
         
       <div className="relative mb-4">
         <label htmlFor="email" className="leading-7 text-sm text-gray-600">Email</label>
@@ -69,8 +68,8 @@ body:JSON.stringify({
         className="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 
         focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors 
         duration-200 ease-in-out" 
-          value={user.email}
-          onChange={handleInputs}
+          value={email}
+          onChange = {(e)=> setEmail(e.target.value)}
         />
       </div>
 
@@ -80,12 +79,18 @@ body:JSON.stringify({
         rounded border border-gray-300 
         focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 
         leading-8 transition-colors duration-200 ease-in-out"
-        value={user.password}
-          onChange={handleInputs} />
+        value={password}
+          onChange= {(e)=> setPassword(e.target.value)} />
       </div>
+
+        { error && <ErrorMessage
+         variant="danger">
+        {error}
+      </ErrorMessage>}
+   
      
       <input class="text-white w-full bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 
-      rounded text-lg"  name="login" id="login" type="submit" value="Login" onClick={PostLogin}/>
+      rounded text-lg"  name="login" id="login" type="submit" value="Login"/>
 
 </form>
 
