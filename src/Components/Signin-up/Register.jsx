@@ -1,54 +1,44 @@
-import React ,{useRef} from 'react';
+import React ,{useRef, useState, useEffect} from 'react';
 import Header from "../Header";
 import Footer from "../footer";
 import {Link,useHistory} from "react-router-dom";
+import ErrorMessage from '../ErrorMessage';
+import { register } from "../../actions/userActions";
+import { useDispatch, useSelector } from "react-redux";
+
+
 
 
 
 export default function Register() {
 
 const history =useHistory();
-  const username =useRef();
-  const email =useRef();
-  const password =useRef();
-  const cpassword =useRef();
+const [email, setEmail] = useState("");
+const [username, setUsername] = useState("");
+const [password, setPassword] = useState("");
+const [cpassword, setCpassword] = useState("");
+const [message, setMessage] = useState(null);
+const dispatch = useDispatch();
 
-  const handleClick = async (e) =>{
-    e.preventDefault();
-    if(cpassword.current.value !== password.current.value){
-      cpassword.current.setCustomValidity("Password doesnot match!")
-    } else{
-      const user ={
-        username:username.current.value,
-        email:email.current.value,
-        password:password.current.value,
+ 
+  const userRegister = useSelector((state) => state.userRegister);
+  const { loading, error, userInfo } = userRegister;
 
-      };
-      try{
-        console.log(user);
-        await fetch("http://localhost:5000/api/users/register",
-    {
-method:"POST",
-headers:{
-  "Content-Type":"application/json"
-},
-body:JSON.stringify({
-  user
-})
-        }).catch(error => {
-          console.log("error")
-    
-        }).then(response => {
-            // this is now called!
-            
-        });
-        history.push("/login");
-      }
-      catch(err){
-        console.log(err);
-      }
+
+  useEffect(() => {
+    if (userInfo) {
+      history.push("/dashboard");
     }
+  }, [history, userInfo]);
+ 
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    if (password !== cpassword) {
+      setMessage("Passwords do not match");
+    } else dispatch(register(username, email, password));
   };
+
 
 
     return (
@@ -69,10 +59,11 @@ body:JSON.stringify({
       </Link>
     <h2 className="sm:text-3xl text-2xl font-medium title-font mb-4 mt-4 text-gray-900 text-justify">Register
             </h2>
-            <form className="registerForm" id="registerForm" onSubmit={handleClick}>
+            <form className="registerForm" id="registerForm" onSubmit={submitHandler}>
             <div className="relative mb-4">
         <label htmlFor="username" className="leading-7 text-sm text-gray-600">Username</label>
-        <input type="text" required minLength="4" ref={username} id="username" name="username" 
+        <input type="text" required minLength="4"  value={username}
+              onChange={(e) => setUsername(e.target.value)} 
         className="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 
         focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors 
         duration-200 ease-in-out" />
@@ -80,15 +71,18 @@ body:JSON.stringify({
         
       <div className="relative mb-4">
         <label htmlFor="email" className="leading-7 text-sm text-gray-600">Email</label>
-        <input type="email" required id="email" name="email" ref={email}
+        <input type="email" required id="email" name="email" value={email}
+              onChange={(e) => setEmail(e.target.value)}
         className="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 
         focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors 
         duration-200 ease-in-out" />
       </div>
+ 
 
       <div className="relative mb-4">
         <label htmlFor="password" className="leading-7 text-sm text-gray-600">Password</label>
-        <input type="password" required minLength="6" id="password" ref={password} name="password" className="w-full bg-white 
+        <input type="password" required minLength="6" id="password" value={password}
+              onChange={(e) => setPassword(e.target.value)} name="password" className="w-full bg-white 
         rounded border border-gray-300 
         focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 
         leading-8 transition-colors duration-200 ease-in-out" />
@@ -96,13 +90,14 @@ body:JSON.stringify({
       
       <div className="relative mb-4">
         <label htmlFor="cpassword"  className="leading-7 text-sm text-gray-600">Confirm Password</label>
-        <input type="password"  ref={cpassword} required minLength="6" id="cpassword" name="cpassword" 
+        <input type="password"  value={cpassword}
+              onChange={(e) => setCpassword(e.target.value)} required minLength="6" id="cpassword" name="cpassword" 
         className="w-full bg-white 
         rounded border border-gray-300 
         focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 
         leading-8 transition-colors duration-200 ease-in-out" />
       </div>
-
+      {message && <ErrorMessage variant="danger">{message}</ErrorMessage>}
 
      
       <input class="text-white w-full bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 

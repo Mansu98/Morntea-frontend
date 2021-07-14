@@ -7,9 +7,23 @@ import {
   ChatBubbleOutline,
 } from "@material-ui/icons";
 import { Link, useHistory } from "react-router-dom";
+import { logout } from "../../../actions/userActions";
+import { useDispatch, useSelector } from "react-redux";
+import {useEffect} from "react";
 
 export default function Sidebar() {
-  const history = useHistory();
+  const dispatch = useDispatch();
+  const history =useHistory();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const logoutHandler = () => {
+    dispatch(logout());
+    history.push("/");
+  };
+  useEffect(() => {}, [userInfo]);
+
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -56,10 +70,7 @@ export default function Sidebar() {
         </div>
         <div className="sidebarMenu">
         <div className="md:flex flex-wrap">
-    <Link onClick={()=> {
-      localStorage.removeItem("userInfo");
-      history.push("/");
-    }}
+    <Link onClick={logoutHandler}
      className="inline-flex text-white bg-green-500 border-0 ml-3
      py-1 px-3 focus:outline-none hover:bg-green-600 rounded text-md text-base mt-4 md:mt-0">Log Out
       </Link>

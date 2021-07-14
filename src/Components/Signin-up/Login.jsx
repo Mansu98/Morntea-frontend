@@ -4,42 +4,30 @@ import Footer from "../footer";
 import {Link , useHistory} from "react-router-dom";
 import axios from "axios";
 import ErrorMessage from '../ErrorMessage';
+import { login } from "../../actions/userActions";
+import { useDispatch, useSelector } from "react-redux";
 
 
 
 export default function Login() {
   const history = useHistory();
-  const [email,setEmail] = useState("");
-  const [password,setPassword] = useState("");
-  const [error,setError] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
+  const dispatch = useDispatch();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading, error, userInfo } = userLogin;
 
   useEffect(() => {
-    const userInfo = localStorage.getItem("userInfo");
-
-    if (userInfo)  {
+    if (userInfo) {
       history.push("/dashboard");
     }
-  }, [history]);
+  }, [history, userInfo]);
 
-  const submitHandler = async(e) =>{
+  const submitHandler = (e) => {
     e.preventDefault();
-    console.log(email,password);
-    try{
-      const config ={
-        headers:{
-        "Content-Type":"application/json"
- 
-      }
-    }
-
-    const {data} = await axios.post("http://localhost:5000/api/users/login", {email,password}, config)
-
-    localStorage.setItem('userInfo', JSON.stringify(data));
-  }
-  catch(error){
-    setError("Invalid Email or Password");
-  }
+    dispatch(login(email, password));
   };
     return (
         <div>
