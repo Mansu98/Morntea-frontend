@@ -5,7 +5,6 @@ import { updatePostAction } from "../../../actions/postsActions";
 import Loading from "../../../Components/Loading";
 import ErrorMessage from "../../../Components/ErrorMessage";
 import {useHistory,useParams} from "react-router-dom";
-import { Image } from "react-bootstrap";
 
 function EditPost() {
   const history=useHistory();
