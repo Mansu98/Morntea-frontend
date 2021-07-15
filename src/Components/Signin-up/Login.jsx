@@ -2,7 +2,6 @@ import React,{useState, useEffect} from 'react';
 import Header from "../Header";
 import Footer from "../footer";
 import {Link , useHistory} from "react-router-dom";
-import axios from "axios";
 import ErrorMessage from '../ErrorMessage';
 import { login } from "../../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";

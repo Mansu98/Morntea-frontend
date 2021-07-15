@@ -1,7 +1,7 @@
 import About from "./Components/aboutus";
 import Contact from "./Components/contactus";
 import News from "./Components/News/news";
-import Home from "./Components/home";
+import Home from "./Components/Home";
 import Writeforus from "./Components/writeforus";
 import Register from "./Components/Signin-up/Register";
 import Login from "./Components/Signin-up/Login";
@@ -13,16 +13,17 @@ import {
 
 
 
+
+
 import Sidebar from "./Dashboard/components/sidebar/Sidebar";
 import UserList from "./Dashboard/pages/userList/UserList";
 import Topbar from "./Dashboard/components/topbar/Topbar";
 import Dashboard from "./Dashboard/pages/home/Home";
 import User from "./Dashboard/pages/user/User";
-import PostList from "./Dashboard/pages/PostList/postList";
-import Post from "./Dashboard/pages/Post/post";
-import CreatePost from "./Dashboard/pages/CreatePost/createpost";
-import EditPost from "./Dashboard/pages/Post/editpost";
-
+import Posts from "./Dashboard/pages/Posts/Posts";
+import Post from "./Dashboard/pages/Post/Post";
+import CreatePost from "./Dashboard/pages/CreatePost/CreatePost";
+import EditPost from "./Dashboard/pages/Post/EditPost";
 import EditProfile from "./Dashboard/pages/userList/editprofile";
 
 
@@ -84,7 +85,7 @@ function App() {
             </div>
           </Route>
 
-          <Route exact path="/dashboard/editpost">
+          <Route exact path="/dashboard/editpost/:id">
           <Topbar />
           <div className="container" style={{ display: "flex",
     marginTop: "10px"}}>
@@ -98,11 +99,11 @@ function App() {
           <div className="container" style={{ display: "flex",
     marginTop: "10px"}}>
         <Sidebar />
-            <PostList />
+            <Posts />
             </div>
           </Route>
 
-          <Route exact path="/dashboard/post">
+          <Route exact path="/dashboard/post/:id">
           <Topbar />
           <div className="container" style={{ display: "flex",
     marginTop: "10px"}}>

@@ -1,12 +1,24 @@
-import React from 'react'
+import React, { useEffect } from "react";
 import Header from "./Header";
-import { Link } from "react-router-dom";
+import { Link,useHistory} from "react-router-dom";
 import Topstories from "./topstories";
 import Homenews from './homenews';
 import Footer from "./footer";
+import { useSelector } from "react-redux";
 
 
-export default function home() {
+
+function Home() {
+  const history = useHistory();
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  useEffect(() => {
+    if (userInfo) {
+      history.push("/dashboard");
+    }
+  }, [history, userInfo]);
+
     return (
         <div>
         <Header/>   
@@ -34,3 +46,4 @@ export default function home() {
         </div>
     )
 }
+export default Home;

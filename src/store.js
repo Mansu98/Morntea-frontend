@@ -8,11 +8,21 @@ import {
 
 } from "./reducers/userReducers";
 
+import {
+  postCreateReducer,
+  postDeleteReducer,
+  postListReducer,
+  postUpdateReducer,
+} from "./reducers/postsReducers";
+
 const reducer = combineReducers({
-  
+
+  postList: postListReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
-  
+  postCreate: postCreateReducer,
+  postDelete: postDeleteReducer,
+  postUpdate: postUpdateReducer
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
