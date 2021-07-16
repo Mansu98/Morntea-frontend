@@ -9,7 +9,7 @@ function CreatePost() {
   const history= useHistory();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
 
   const dispatch = useDispatch();
 
@@ -72,6 +72,15 @@ function CreatePost() {
         focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors
          duration-200 ease-in-out " />
         </div>
+
+        <div className="p-2 w-full">
+        <div class="relative flex-grow w-full"  style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center"}}>
+            <img src={image} alt={image} style={{  display: "flex",alignItems: "center", height:"180px"}} />
+   </div>
+   </div>
         <div className="p-2 w-full">
           <div className="relative">
           <label for="image" class="leading-7 text-md text-gray-600">Choose Your Image</label>

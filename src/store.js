@@ -5,6 +5,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import {
   userLoginReducer,
   userRegisterReducer,
+  userUpdateReducer
 
 } from "./reducers/userReducers";
 
@@ -22,7 +23,8 @@ const reducer = combineReducers({
   userRegister: userRegisterReducer,
   postCreate: postCreateReducer,
   postDelete: postDeleteReducer,
-  postUpdate: postUpdateReducer
+  postUpdate: postUpdateReducer,
+  userUpdate: userUpdateReducer
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

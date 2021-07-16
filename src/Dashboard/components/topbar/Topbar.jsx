@@ -1,10 +1,15 @@
-import React from "react";
+import React ,{useEffect} from 'react';
 import "./topbar.css";
 import {Link} from "react-router-dom";
 import { NotificationsNone, Language, Settings } from "@material-ui/icons";
 import AddIcon from '@material-ui/icons/Add';
+import {useSelector } from "react-redux";
 
 export default function Topbar() {
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  useEffect(() => {}, [userInfo]); 
+
   return (
     <div className="text-gray-600 body-font bg-green-100">
     <div className="container mx-auto md:flex flex-wrap p-5 px-8 flex-col md:flex-row items-center">
@@ -27,7 +32,7 @@ export default function Topbar() {
       <Link  to ="#"  className="mr-5 hover:text-gray-900"><Settings /></Link>
 
       <Link  to ="/dashboard/users"  className="mr-5 hover:text-gray-900">
-      <img src="https://images.pexels.com/photos/1526814/pexels-photo-1526814.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+      <img src={`${userInfo.image}`}
        alt="" className="topAvatar" />
        </Link>
 

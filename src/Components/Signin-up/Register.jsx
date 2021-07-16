@@ -7,9 +7,6 @@ import { register } from "../../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 
 
-
-
-
 export default function Register() {
 
 const history =useHistory();
@@ -18,11 +15,14 @@ const [username, setUsername] = useState("");
 const [password, setPassword] = useState("");
 const [cpassword, setCpassword] = useState("");
 const [message, setMessage] = useState(null);
+const [emailerr, setEmailerr] = useState(null);
+
 const dispatch = useDispatch();
 
  
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, error, userInfo } = userRegister;
+  console.log(error)
 
 
   useEffect(() => {
@@ -33,10 +33,17 @@ const dispatch = useDispatch();
  
   const submitHandler = (e) => {
     e.preventDefault();
-
-    if (password !== cpassword) {
+    if(error){
+      setEmailerr("email already exists")
+    }
+   
+    else if (password !== cpassword) {
       setMessage("Passwords do not match");
-    } else dispatch(register(username, email, password));
+    }
+     else dispatch(register(username, email, password));
+    
+ 
+     
   };
 
 
@@ -77,6 +84,7 @@ const dispatch = useDispatch();
         focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors 
         duration-200 ease-in-out" />
       </div>
+      {emailerr && <ErrorMessage variant="danger">{emailerr}</ErrorMessage>}
  
 
       <div className="relative mb-4">

@@ -1,8 +1,6 @@
 import axios from "axios";
-import {useParams} from "react-router-dom";
+import {useParams, Link} from "react-router-dom";
 import React, { useEffect, useState } from "react";
-
-
 
 function Post() {
   const { id } = useParams();
@@ -40,6 +38,12 @@ function Post() {
  
       <p className="leading-relaxed text-lg mb-4 mt-4">{content}
             </p>
+
+            <Link to={`/dashboard/editpost/${id}`} className="text-white bg-green-500 border-0 ml-3
+     py-1 px-3 focus:outline-none hover:bg-green-600 rounded text-md ">Edit Post
+      </Link>
+
+    
     </div>
   </div>
 </section>

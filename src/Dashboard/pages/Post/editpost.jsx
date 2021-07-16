@@ -85,9 +85,17 @@ function EditPost() {
          duration-200 ease-in-out " />
         </div>
         <div className="p-2 w-full">
+        <div class="relative flex-grow w-full"  style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center"}}>
+            <img src={image} alt={image} style={{  display: "flex",alignItems: "center", height:"180px"}} />
+   </div>
+   </div>
+          <div className="p-2 w-full">
           <div className="relative">
           <label for="image" class="leading-7 text-md text-gray-600">Choose Your Image</label>
-          <input type="file" id="image" name="image" onChange={(e) => postImage(e.target.files[0])}
+          <input type="file" id="image" name="image" accept="image/*" onChange={(e) => postImage(e.target.files[0])}
                   
                  class="w-full bg-gray-100 bg-opacity-50 
             rounded border border-green-500 focus:border-green-500 focus:bg-white focus:ring-2 

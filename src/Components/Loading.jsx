@@ -1,6 +1,6 @@
 import { Spinner } from "react-bootstrap";
 
-function Loading({ size = 100 }) {
+function Loading({ size = 20}){
   return (
     <div
       style={{
@@ -15,6 +15,7 @@ function Loading({ size = 100 }) {
         style={{
           width: size,
           height: size,
+
         }}
         animation="border"
       />

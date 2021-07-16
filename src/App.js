@@ -19,12 +19,11 @@ import Sidebar from "./Dashboard/components/sidebar/Sidebar";
 import UserList from "./Dashboard/pages/userList/UserList";
 import Topbar from "./Dashboard/components/topbar/Topbar";
 import Dashboard from "./Dashboard/pages/home/Home";
-import User from "./Dashboard/pages/user/User";
 import Posts from "./Dashboard/pages/Posts/Posts";
 import Post from "./Dashboard/pages/Post/Post";
 import CreatePost from "./Dashboard/pages/CreatePost/CreatePost";
 import EditPost from "./Dashboard/pages/Post/EditPost";
-import EditProfile from "./Dashboard/pages/userList/editprofile";
+import EditProfile from "./Dashboard/pages/userList/EditProfile";
 
 
 function App() {
@@ -76,14 +75,6 @@ function App() {
     </Route>
 
 
-    <Route exact path="/dashboard/user/:userId">
-    <Topbar />
-          <div className="container" style={{ display: "flex",
-    marginTop: "10px"}}>
-        <Sidebar />
-            <User />
-            </div>
-          </Route>
 
           <Route exact path="/dashboard/editpost/:id">
           <Topbar />

@@ -4,8 +4,8 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import { useDispatch, useSelector } from "react-redux";
 import { deletePostAction, listPosts } from "../../../actions/postsActions";
 import {useEffect} from "react";
-import ErrorMessage from "../../../Components/ErrorMessage";
-import Loading from "../../../Components/Loading";
+
+
 
 import React from 'react';
 
@@ -14,15 +14,14 @@ function Posts() {
   const dispatch = useDispatch();
 
   const postList = useSelector((state) => state.postList);
-  const { loading, error, posts } = postList;
+  const { posts } = postList;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   const postDelete = useSelector((state) => state.postDelete);
   const {
-    loading: loadingDelete,
-    error: errorDelete,
+  
     success: successDelete,
   } = postDelete;
 
@@ -56,17 +55,12 @@ function Posts() {
     <div>
 
 <section class="text-gray-600 body-font overflow-hidden">
-<h2 class="text-3xl font-large text-lg text-green-600 title-font mb-3 mt-5 text-center">Your Posts</h2>
+<h2 class="text-3xl font-large text-lg text-green-600 title-font mb-3 mt-5 pl-5 pr-5 text-justify">Your Posts</h2>
 
   <div class="container px-5 py-10 mx-auto">
  
     <div class="-my-8 divide-y-2 divide-gray-100">
-    {/* {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
-      {errorDelete && (
-        <ErrorMessage variant="danger">{errorDelete}</ErrorMessage>
-      )}
-      {loading && <Loading />}
-      {loadingDelete && <Loading />} */}
+
     {posts?.map((post) => (
     <div class="py-5 flex flex-wrap md:flex-nowrap bg-green-100 mb-7" key={post._id}>
         <div class="md:w-120 md:mb-0 mb-6 m-5 flex flex flex-col">
@@ -77,9 +71,9 @@ function Posts() {
           
         </div>
         <div class="md:flex-grow">
-          <h2 class="text-2xl font-medium text-gray-700 title-font mb-2">{post.title}</h2>
+          <h2 class="text-2xl font-medium text-gray-700 title-font mb-2">{post.title.substring(0, 90)}...</h2>
           <span class="mt-1 text-gray-500 text-sm">{post.createdAt.substring(0, 10)}</span>
-          <p class="leading-relaxed">{post.content.substring(0, 360)}</p>
+          <p class="leading-relaxed">{post.content.substring(0, 360)}...</p>
           <div className="md:flex flex-wrap mt-3">
           <Link to ={`/dashboard/post/${post._id}`} class="text-green-700 ml-3 hover:text-green-500 inline-flex items-center mt-4">Learn More
             <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -99,7 +93,7 @@ function Posts() {
       </div>
         </div>
         </div>
-    ))};
+    ))}
      </div>
      </div>
 

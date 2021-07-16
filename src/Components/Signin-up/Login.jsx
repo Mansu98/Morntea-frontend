@@ -6,12 +6,12 @@ import ErrorMessage from '../ErrorMessage';
 import { login } from "../../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 
-
-
 export default function Login() {
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errormsg, setErrormsg] = useState(null);
+
 
   const dispatch = useDispatch();
 
@@ -26,6 +26,10 @@ export default function Login() {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    if (error) {
+      setErrormsg("Invalid Email or Password!");
+    } else 
+    setErrormsg(null);
     dispatch(login(email, password));
   };
     return (
@@ -70,12 +74,8 @@ export default function Login() {
           onChange= {(e)=> setPassword(e.target.value)} />
       </div>
 
-        { error && <ErrorMessage
-         variant="danger">
-        {error}
-      </ErrorMessage>}
-   
-     
+      {errormsg && <ErrorMessage variant="danger">{errormsg}</ErrorMessage>}
+
       <input class="text-white w-full bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 
       rounded text-lg"  name="login" id="login" type="submit" value="Login"/>
 

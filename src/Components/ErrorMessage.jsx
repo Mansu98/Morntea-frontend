@@ -7,7 +7,8 @@ const ErrorMessage =({variant="info",
  {
     return (
         <Alert variant={variant}
-         style={{fontSize:20 , border: "3px solid red", backgroundColor:"red", color:"white", textAlign:"center" , "marginBottom":"5px"}}>
+         style={{fontSize:20 , border: "3px solid red", backgroundColor:"red", color:"white", 
+         textAlign:"center" , "marginBottom":"5px"}}>
              <strong>{children}</strong>
             </Alert>
 
