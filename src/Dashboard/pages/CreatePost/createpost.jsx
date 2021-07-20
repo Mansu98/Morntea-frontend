@@ -3,7 +3,7 @@ import { createPostAction } from "../../../actions/postsActions";
 import Loading from "../../../Components/Loading";
 import ErrorMessage from "../../../Components/ErrorMessage";
 import React, { useEffect, useState } from "react";
-import {Link, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 function CreatePost() {
   const history= useHistory();

@@ -1,4 +1,4 @@
-import React ,{useRef, useState, useEffect} from 'react';
+import React ,{ useState, useEffect} from 'react';
 import Header from "../Header";
 import Footer from "../footer";
 import {Link,useHistory} from "react-router-dom";
@@ -21,7 +21,7 @@ const dispatch = useDispatch();
 
  
   const userRegister = useSelector((state) => state.userRegister);
-  const { loading, error, userInfo } = userRegister;
+  const { error, userInfo } = userRegister;
   console.log(error)
 
 

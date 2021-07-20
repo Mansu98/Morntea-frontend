@@ -16,7 +16,7 @@ export default function Login() {
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
-  const { loading, error, userInfo } = userLogin;
+  const { error, userInfo } = userLogin;
 
   useEffect(() => {
     if (userInfo) {

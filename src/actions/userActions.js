@@ -24,7 +24,7 @@ export const login = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "http://localhost:5000/api/users/login",
+      "https://morntea-mern.herokuapp.com/api/users/login",
       { email, password },
       config
     );
@@ -60,7 +60,7 @@ export const register = (username, email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "http://localhost:5000/api/users/register",
+      "https://morntea-mern.herokuapp.com/api/users/register",
       { username, email, password },
       config
     );
@@ -97,7 +97,7 @@ export const updateProfile = (user) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post("http://localhost:5000/api/users/editprofile", user, config);
+    const { data } = await axios.post("https://morntea-mern.herokuapp.com/api/users/editprofile", user, config);
 
     dispatch({ type: USER_UPDATE_SUCCESS, payload: data });
 

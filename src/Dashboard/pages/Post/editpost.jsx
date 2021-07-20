@@ -20,7 +20,7 @@ function EditPost() {
 
   useEffect(() => {
     const fetching = async () => {
-      const { data } = await axios.get(`http://localhost:5000/api/posts/${id}`);
+      const { data } = await axios.get(`https://morntea-mern.herokuapp.com/api/posts/${id}`);
 
       setTitle(data.title);
       setContent(data.content);

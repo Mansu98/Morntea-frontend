@@ -71,7 +71,8 @@ setMessage("")
     
     setTimeout(function() {
       history.push("/dashboard/users");
-      userUpdate.success = false;
+      setMessage(null)
+    
     }, 1000);
    
 
@@ -92,7 +93,7 @@ setMessage("")
                   Updated Successfully
                 </ErrorMessage>
               )}
-              {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+              
               {message && <ErrorMessage variant="danger">{message}</ErrorMessage>}
       <div class="flex lg:w-full w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4
        sm:px-0 items-end mb-5">

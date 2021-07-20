@@ -31,7 +31,7 @@ import {
         },
       };
   
-      const { data } = await axios.get(`http://localhost:5000/api/posts`, config);
+      const { data } = await axios.get(`https://morntea-mern.herokuapp.com/api/posts`, config);
   
       dispatch({
         type: POSTS_LIST_SUCCESS,
@@ -70,7 +70,7 @@ import {
       };
   
       const { data } = await axios.post(
-        `http://localhost:5000/api/posts/create`,
+        `https://morntea-mern.herokuapp.com/api/posts/create`,
         { title, content, image },
         config
       );
@@ -107,7 +107,7 @@ import {
         },
       };
   
-      const { data } = await axios.delete(`http://localhost:5000/api/posts/${id}`, config);
+      const { data } = await axios.delete(`https://morntea-mern.herokuapp.com/api/posts/${id}`, config);
   
       dispatch({
         type: POSTS_DELETE_SUCCESS,
@@ -146,7 +146,7 @@ import {
       };
   
       const { data } = await axios.put(
-        `http://localhost:5000/api/posts/${id}`,
+        `https://morntea-mern.herokuapp.com/api/posts/${id}`,
         { title, content, image },
         config
       );
